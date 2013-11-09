@@ -99,6 +99,7 @@ struct pcm_config {
      * (pcm_open() called with PCM_MMAP flag set).   Use 0 for default.
      */
     int avail_min;
+    unsigned int in_init_channels;    // keep the record init channels
 };
 
 /* Mixer control types */
@@ -117,6 +118,8 @@ enum mixer_ctl_type {
 /* Open and close a stream */
 struct pcm *pcm_open(unsigned int card, unsigned int device,
                      unsigned int flags, struct pcm_config *config);
+struct pcm *pcm_open_req(unsigned int card, unsigned int device,
+                     unsigned int flags, struct pcm_config *config, int requested_rate);
 int pcm_close(struct pcm *pcm);
 int pcm_is_ready(struct pcm *pcm);
 
